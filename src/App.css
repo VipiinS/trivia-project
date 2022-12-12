@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    padding: 0 0 10px 0;
     font-family: "Karla", sans-serif;
     --bg:hsl(220, 43%, 97%);
     --selected: #D6DBF5;
@@ -99,6 +99,7 @@ button{
     font-weight: 600;
     font-size: 14px;
     color: #f5f7fb;
+    margin: 0 auto;
 }
 
 .result-container {
@@ -116,7 +117,7 @@ color: #293264;
 
 
 
-@media screen and (max-width:380px) {
+@media screen and (max-width:500px) {
     .ans-btn-container{
         grid-template-columns: repeat(2,1fr);
         grid-gap: 20px;

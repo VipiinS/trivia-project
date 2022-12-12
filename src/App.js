@@ -41,11 +41,14 @@ function App() {
         )
       }) 
   },[])
-  console.log(quesAnswers)
 
 
-  function updateAnswer(){
-
+  function updateAnswer(option,currQuestion){
+    setQuesAndAnswers(quesAnswers.map((quesObj)=>{
+      return quesObj.question === currQuestion ?
+              {...quesObj, selectedAnswer : option}:
+              quesObj;
+    }))
   }
   
 
@@ -65,7 +68,15 @@ function App() {
   )
 
   return (
-    <div className='questions-container'>{questionElements}</div>
+    <div>
+      <div className='questions-container'>
+        {questionElements}
+      </div>
+      <div className='result-container'>
+        <button className="check-btn">Check Answers</button>
+      </div>
+
+    </div>
   );
 }
 
