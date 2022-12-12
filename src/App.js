@@ -1,6 +1,6 @@
 import './App.css';
-import React
- from 'react';
+import React from 'react';
+import Question from './components/Question'
 function App() {
   // fro initially getting from the API
   const [ques,setQues] = React.useState([])
@@ -27,10 +27,12 @@ function App() {
         )
       }) 
 
+
+
   },[])
 
   return (
-    <div></div>
+    <Question />
   );
 }
 

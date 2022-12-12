@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Karla", sans-serif;
+    --bg:hsl(220, 43%, 97%);
+    --selected: #D6DBF5;
+    --text-color: #293264;
+    --button-color : #4D5B9E;
+    --button-text: #F5F7FB;
+    --correct-answer :#94D7A2;
+    --incorrect-answer : #F8BCBC;
+    --incorrect-border : #F8BAAC;
+  }
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg);
+    color:var(--text-color);
+    height: 100%;
+}
+
+button{
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+}
+
+.ques-container{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    border-bottom: solid 1.5px #dbdef0;
+}
+
+
+.question{
+    font-family: "Karla", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: #293264;
+    line-height: 19px;
+    text-align: center;
+}
+
+.ans-btn-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    /* flex-wrap: wrap; */
+    grid-gap: 15px;
+    margin-top: 20px;
+}
+
+
+.btn{
+    border: 1px solid #4d5b9e;
+    border-radius: 8px;
+    background-color: transparent;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #293264;
+    padding: 4px 14px;
+}
+
+.ans-btn-selected{
+    background-color: var(--selected);
+    border: var(--selected);
+    font-weight: 600;
+}
+
+.ans-btn-correct{
+    background-color: var(--correct-answer);
+    border: var(--correct-answer);
+}
+
+.btn-dimmed{
+    opacity: 0.5;
+}
+
+.ans-btn-incorrect{
+    background-color: var(--incorrect-answer);
+    border: var(--incorrect-border);
+
+}
+
+.check-btn,
+.play-again-btn {
+    background-color: #4d5b9e;
+    border-radius: 10px;
+    padding: 14px 25px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #f5f7fb;
+}
+
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+  .result-message {
+font-family: "Inter", sans-serif;
+font-weight: 700;
+color: #293264;
+}
+
+
+
+@media screen and (max-width:380px) {
+    .ans-btn-container{
+        grid-template-columns: repeat(2,1fr);
+        margin-top: 30px;
+    }
+    .btn{
+        padding-top: 5px;
+    }
+}
