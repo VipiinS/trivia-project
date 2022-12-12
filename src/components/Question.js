@@ -1,18 +1,22 @@
 import React from "react";
 
-export default function Question(){
+export default function Question(props){
+
+    const ansElements = props.options.map((option,index)=>{
+        return(
+        <button key={index} className="btn">{option}</button>
+        )
+    })
 
 
+    const quesElement = <h1 className="question">{props.question}</h1>
     return(
-        <div className="ques-container">
-            <h1 className="question">This is a question </h1>
+        <div className="question-container">
+            {quesElement}
             <div className="ans-btn-container">
-            <button className="btn ans-btn-selected btn-selected">option</button>
-            <button className="btn ans-btn-correct btn-selected">option</button>
-            <button className="btn btn-dimmed btn-selected">option</button>
-            <button className="btn ans-btn-incorrect xbtn-selected">option</button>
+
+                {ansElements}
             </div>
-            
         </div>
     )
 }
