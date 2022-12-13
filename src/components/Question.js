@@ -16,7 +16,7 @@ export default function Question(props){
         onClick={() => { props.updateAnswer(option, props.question) } }
         >
             {decode(option)}
-        </button>
+        </button>   
         )
     })
 

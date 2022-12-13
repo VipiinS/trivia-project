@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import Question from './components/Question'
+import Confetti from 'react-confetti'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
   const [showResult, setShowResult] = React.useState(false);
 
   const[reset,changeReset] = React.useState(true);
+  const { width, height} = {width:"400px", height: "1000px"}
 
 
   React.useEffect(()=>{
@@ -118,13 +120,19 @@ function App() {
         {!showResult && <button className="check-btn" onClick={checkAns}>Check Answers</button>}
         {showResult && 
         <div className='result-container'>
-          <button className="check-btn" onClick={playAgain}>Play again</button>
+
+          {/* confetti drop when scored above 5 */}
+          {showResult && numCorrectAnswers >= 3 && <Confetti
+          className='confetti'
+          width={width}
+          height={height}
+          />}
           <p>You have Scored {numCorrectAnswers} out of 5.</p>
+          <button className="check-btn" onClick={playAgain}>Continue</button>
         </div>
         }
-        {(showResult && numCorrectAnswers >= 3) && <p>Gethu mamey ne</p>}
+        
       </div>
-
     </div>
   );
 }
