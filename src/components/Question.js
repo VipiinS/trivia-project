@@ -1,4 +1,5 @@
 import React from "react";
+import {decode} from 'html-entities'; // to decode the html entities
 
 export default function Question(props){
 
@@ -8,19 +9,19 @@ export default function Question(props){
         key={index} 
         className={`btn
             ${props.selectedAnswer === option ? "ans-btn-selected":""} // when an option is selected
-
-        
-        
+            ${props.showResult && (option === props.correctAnswer) ? "ans-btn-correct" : ""}
+            ${props.showResult && (props.selectedAnswer === option) && (option !== props.correctAnswer) ? "ans-btn-incorrect" : ""}
+            ${props.showResult && (props.selectedAnswer !== option)  ? "ans-btn-dimmed" : ""}
         `}
         onClick={() => { props.updateAnswer(option, props.question) } }
         >
-            {option}
+            {decode(option)}
         </button>
         )
     })
 
 
-    const quesElement = <h1 className="question">{props.question}</h1>
+    const quesElement = <h1 className="question">{decode(props.question)}</h1>
     return(
         <div className="question-container">
             {quesElement}
@@ -28,6 +29,5 @@ export default function Question(props){
                 {ansElements}
             </div>
         </div>
-
     )
 }

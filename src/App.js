@@ -11,6 +11,7 @@ function App() {
   const [quesAnswers,setQuesAndAnswers] = React.useState([]);
 
   // to count the number of correct answers
+
   const [numCorrectAnswers, setNumCorrectAnswers] = React.useState(0);
 
   //will show error when clicking check answer and not all answers are attended
@@ -18,6 +19,8 @@ function App() {
 
   // will show result when true
   const [showResult, setShowResult] = React.useState(false);
+
+  const[reset,changeReset] = React.useState(true);
 
 
   React.useEffect(()=>{
@@ -40,14 +43,24 @@ function App() {
           })
         )
       }) 
-  },[])
+  },[reset])
 
 
   function updateAnswer(option,currQuestion){
+
     setQuesAndAnswers(quesAnswers.map((quesObj)=>{
-      return quesObj.question === currQuestion ?
-              {...quesObj, selectedAnswer : option}:
-              quesObj;
+      //map in the array to find the question selected
+        if(quesObj.question === currQuestion){
+          //if the selected option is again slecetd,then it is unselecetd
+          if(quesObj.selectedAnswer === option)
+            return {...quesObj, selectedAnswer : ""}
+          else
+          //else the choosen option is selected
+            return {...quesObj, selectedAnswer : option}
+        }
+        //other questions are returned
+        else
+          return quesObj
     }))
   }
   
@@ -67,13 +80,49 @@ function App() {
 
   )
 
+  function checkAns(){
+    const notAllAnswered = quesAnswers.some(
+    (obj)=>{
+      return obj.selectedAnswer === ""
+    }
+    )
+    console.log(notAllAnswered)
+    setShowWarning(notAllAnswered)
+    if (!notAllAnswered && !showResult) {
+      quesAnswers.forEach((questionObject) => {
+        // compare selected answer & correct answer
+        if (questionObject.selectedAnswer === questionObject.correctAnswer) {
+          setNumCorrectAnswers(
+            (prevNumCorrectAnswers) => prevNumCorrectAnswers + 1
+          );
+        }
+      });
+
+      setShowResult(true);
+    }
+  }
+
+  function playAgain(){
+    setNumCorrectAnswers(0);
+    setShowResult(false); 
+    changeReset(prev => !prev );
+  }
+
   return (
     <div>
       <div className='questions-container'>
         {questionElements}
       </div>
       <div className='result-container'>
-        <button className="check-btn">Check Answers</button>
+        {showWarning && <p className='result-message result-message-error'> Attend all questions </p>}
+        {!showResult && <button className="check-btn" onClick={checkAns}>Check Answers</button>}
+        {showResult && 
+        <div className='result-container'>
+          <button className="check-btn" onClick={playAgain}>Play again</button>
+          <p>You have Scored {numCorrectAnswers} out of 5.</p>
+        </div>
+        }
+        {(showResult && numCorrectAnswers >= 3) && <p>Gethu mamey ne</p>}
       </div>
 
     </div>
